@@ -1,0 +1,52 @@
+
+\begin{table}[H]
+\centering
+\caption{Simulación de bias para tamaños muestrales de $Y  \sim 0.5N(0, 1) + 0.5N(3,1)$, $X \sim 0.5N(\mu_x,1) + 0.5N(\mu_x + 4, 5)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+n & $\eta_{sd}$ & $\hat{\eta}_{sd}^{NonParametric}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K = g, h=csv}$ & $\hat{\eta}_{sd}^{K = g, h = h*}$ \\
+\midrule
+20 & 0.856927 & -0.7152 & -0.0066 & 0.1276 & 0.1238 \\
+20 & 0.870384 & -0.6901 & 0.0771 & 0.1384 & 0.1261 \\
+20 & 0.860037 & -0.6194 & 0.1226 & 0.1083 & 0.1391 \\
+\midrule
+50 & 0.856927 & -0.7526 & 0.0456 & 0.1298 & 0.1416 \\
+50 & 0.870384 & -0.7272 & 0.1038 & 0.1388 & 0.1289 \\
+50 & 0.860037 & -0.6635 & 0.1325 & 0.1084 & 0.1395 \\
+\midrule
+100 & 0.856927 & -0.7746 & 0.0644 & 0.1298 & 0.1420 \\
+100 & 0.870384 & -0.7465 & 0.1102 & 0.1387 & 0.1290 \\
+100 & 0.860037 & -0.6869 & 0.1342 & 0.1083 & 0.1395 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
+
+
+
+\begin{table}[H]
+\centering
+\caption{Simulación de rmse para tamaños muestrales de $Y  \sim 0.5N(0, 1) + 0.5N(3,1)$, $X \sim 0.5N(\mu_x,1) + 0.5N(\mu_x + 4, 5)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+n & $\eta_{sd}$ & $\hat{\eta}_{sd}^{NonParametric}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K = g, h=csv}$ & $\hat{\eta}_{sd}^{K = g, h = h*}$ \\
+\midrule
+20 & 0.856927 & 0.7167 & 0.2144 & 0.1285 & 0.1400 \\
+20 & 0.870384 & 0.6924 & 0.1304 & 0.1384 & 0.1274 \\
+20 & 0.860037 & 0.6235 & 0.1302 & 0.1083 & 0.1392 \\
+\midrule
+50 & 0.856927 & 0.7533 & 0.1262 & 0.1298 & 0.1417 \\
+50 & 0.870384 & 0.7282 & 0.1102 & 0.1388 & 0.1289 \\
+50 & 0.860037 & 0.6651 & 0.1329 & 0.1084 & 0.1395 \\
+\midrule
+100 & 0.856927 & 0.7749 & 0.0947 & 0.1298 & 0.1420 \\
+100 & 0.870384 & 0.7471 & 0.1115 & 0.1387 & 0.1290 \\
+100 & 0.860037 & 0.6879 & 0.1343 & 0.1083 & 0.1395 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}

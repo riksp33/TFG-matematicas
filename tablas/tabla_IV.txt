@@ -1,0 +1,52 @@
+
+\begin{table}[H]
+\centering
+\caption{Simulación de bias para tamaños muestrales de $\log(Y) \sim N(2.5, 0.25)$, $\log(X) \sim N(\mu_x, 0.09)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+n & $\eta_{sd}$ & $\hat{\eta}_{sd}^{NonParametric}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K = g, h=csv}$ & $\hat{\eta}_{sd}^{K = g, h = h*}$ \\
+\midrule
+20 & 0.388235 & -0.2617 & 0.0385 & 0.1381 & 0.5498 \\
+20 & 0.572923 & -0.4175 & 0.0771 & 0.0647 & 0.4037 \\
+20 & 0.803172 & -0.5688 & 0.1037 & 0.0306 & 0.1926 \\
+\midrule
+50 & 0.388235 & -0.3299 & -0.0604 & 0.1417 & 0.5634 \\
+50 & 0.572923 & -0.4924 & 0.0362 & 0.0651 & 0.4096 \\
+50 & 0.803172 & -0.6652 & 0.1201 & 0.0307 & 0.1941 \\
+\midrule
+100 & 0.388235 & -0.3571 & -0.0984 & 0.1419 & 0.5686 \\
+100 & 0.572923 & -0.5300 & 0.0015 & 0.0651 & 0.4111 \\
+100 & 0.803172 & -0.7207 & 0.1363 & 0.0307 & 0.1944 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
+
+
+
+\begin{table}[H]
+\centering
+\caption{Simulación de rmse para tamaños muestrales de $\log(Y) \sim N(2.5, 0.25)$, $\log(X) \sim N(\mu_x, 0.09)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+n & $\eta_{sd}$ & $\hat{\eta}_{sd}^{NonParametric}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K = g, h=csv}$ & $\hat{\eta}_{sd}^{K = g, h = h*}$ \\
+\midrule
+20 & 0.388235 & 0.2667 & 0.2381 & 0.1401 & 0.5539 \\
+20 & 0.572923 & 0.4217 & 0.2594 & 0.0648 & 0.4043 \\
+20 & 0.803172 & 0.5748 & 0.1797 & 0.0306 & 0.1927 \\
+\midrule
+50 & 0.388235 & 0.3304 & 0.1533 & 0.1418 & 0.5640 \\
+50 & 0.572923 & 0.4932 & 0.2102 & 0.0651 & 0.4099 \\
+50 & 0.803172 & 0.6672 & 0.1618 & 0.0307 & 0.1941 \\
+\midrule
+100 & 0.388235 & 0.3572 & 0.1266 & 0.1419 & 0.5689 \\
+100 & 0.572923 & 0.5302 & 0.1649 & 0.0651 & 0.4112 \\
+100 & 0.803172 & 0.7212 & 0.1559 & 0.0307 & 0.1945 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
