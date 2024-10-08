@@ -1,6 +1,6 @@
 
 
-source('~/Desktop/ucm/TFGs/Mates/codigo/codigo_final/funciones_auxiliares.R')
+source('~/Desktop/ucm/TFGs/Mates/TFG-matematicas/funciones_auxiliares.R')
 
 
 SimulateBiasRMSE = function(AUCs , tamaños){
