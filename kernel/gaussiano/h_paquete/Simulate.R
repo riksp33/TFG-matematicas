@@ -1,7 +1,5 @@
-directorio = "/Users/Riki/Desktop/ucm/TFGs/Mates/TFG-matematicas/kernel/gaussiano/h_paquete/Scripts"
-setwd('/Users/Riki/Desktop/ucm/TFGs/Mates/TFG-matematicas/kernel/gaussiano/h_paquete/jsons')
+directorio = here('kernel','gaussiano','h_paquete', 'Scripts')
 
-# Lista todos los archivos .R en el directorio
 scripts = list.files(path = directorio, pattern = "\\.R$", full.names = TRUE)
 
 # Ejecuta cada script

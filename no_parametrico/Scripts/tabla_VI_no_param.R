@@ -1,7 +1,4 @@
-source('~/Desktop/ucm/TFGs/Mates/TFG-matematicas/funciones_auxiliares.R')
-
-
-
+source(here('funciones_auxiliares.R'))
 
 SimulateBiasRMSE = function(AUCs , tamaños){
   lista_json = list()
@@ -67,7 +64,9 @@ SimulateBiasRMSE = function(AUCs , tamaños){
     
   }
   json = toJSON(lista_json, pretty = T, digits = NA)
-  write(json, file = 'tabla_VI_no_param.json')
+  dir_path = here('no_parametrico', 'jsons')
+  full_path = file.path(dir_path,'tabla_VI_no_param.json' )
+  write(json, file = full_path)
 }
 
 

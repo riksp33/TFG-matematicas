@@ -1,4 +1,4 @@
-source('~/Desktop/ucm/TFGs/Mates/TFG-matematicas/funciones_auxiliares.R')
+source(here('funciones_auxiliares.R'))
 
 SimulateBiasRMSE = function(AUCs , tamaños){
   lista_json = list()
@@ -52,7 +52,9 @@ SimulateBiasRMSE = function(AUCs , tamaños){
     
   }
   json = toJSON(lista_json, pretty = T, digits = NA)
-  write(json, file = 'tabla_I_kernel_h_funcion_gaussiano.json')
+  dir_path = here('kernel', 'gaussiano', 'h_paquete', 'jsons')
+  full_path = file.path(dir_path,'tabla_I_kernel_h_funcion_gaussiano.json' )
+  write(json, file = full_path)
 }
 
 

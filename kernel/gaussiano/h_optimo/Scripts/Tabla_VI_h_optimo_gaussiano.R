@@ -1,4 +1,4 @@
-source('~/Desktop/ucm/TFGs/Mates/TFG-matematicas/funciones_auxiliares.R')
+source(here('funciones_auxiliares.R'))
 
 
 SimulateBiasRMSE = function(AUCs , tamaños){
@@ -74,8 +74,9 @@ SimulateBiasRMSE = function(AUCs , tamaños){
     
   }
   json = toJSON(lista_json, pretty = T, digits = NA)
-  write(json, file = 'tabla_VI_kernel_h_optimo_gaussiano.json')
-}
+  dir_path = here('kernel', 'gaussiano', 'h_optimo', 'jsons')
+  full_path = file.path(dir_path,'tabla_VI_kernel_h_optimo_gaussiano.json' )
+  write(json, file = full_path)}
 
 
 set.seed(1)

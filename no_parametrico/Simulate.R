@@ -1,5 +1,4 @@
-directorio = "/Users/Riki/Desktop/ucm/TFGs/Mates/TFG-matematicas/no_parametrico/Scripts"
-setwd('/Users/Riki/Desktop/ucm/TFGs/Mates/TFG-matematicas/no_parametrico/jsons')
+directorio = here('no_parametrico', 'Scripts')
 scripts = list.files(path = directorio, pattern = "\\.R$", full.names = TRUE)
 
 for (script in scripts) {
