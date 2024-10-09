@@ -62,10 +62,10 @@ def gen_all_tables():
     }
 
     for n in ns:
-        archivo1 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/no_parametrico/jsons/tabla_{n}_no_param.json'  # NonParametric (contiene eta_pob)
-        archivo2 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/parametrico/jsons/tabla_{n}_param.json'  # N
-        archivo3 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_paquete/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=csv
-        archivo4 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_optimo/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=h*  
+        archivo1 = f'./no_parametrico/jsons/tabla_{n}_no_param.json'  # NonParametric (contiene eta_pob)
+        archivo2 = f'./parametrico/jsons/tabla_{n}_param.json'  # N
+        archivo3 = f'./kernel/gaussiano/h_paquete/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=csv
+        archivo4 = f'./kernel/gaussiano/h_optimo/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=h*  
 
         datos1 = cargar_datos(archivo1)
         datos2 = cargar_datos(archivo2)
@@ -76,29 +76,11 @@ def gen_all_tables():
         tabla_bias = generar_tabla_latex("bias", datos1, datos2, datos3, datos4, titulos[n])
         tabla_rmse = generar_tabla_latex("rmse", datos1, datos2, datos3, datos4, titulos[n]) 
 
-        with open(f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/tablas/tabla_{n}.txt', 'w') as f:
+        with open(f'./tablas/tabla_{n}.txt', 'w') as f:
             f.write(tabla_bias)
             f.write("\n\n")      
             f.write(tabla_rmse)          
 
-
-# n = 'I'
-# archivo1 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/no_parametrico/jsons/tabla_{n}_no_param.json'  # NonParametric (contiene eta_pob)
-# archivo2 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/parametrico/jsons/tabla_{n}_param.json'  # N
-# archivo3 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_paquete/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=csv
-# archivo4 = f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_optimo/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=h*
-
-# datos1 = cargar_datos(archivo1)
-# datos2 = cargar_datos(archivo2)
-# datos3 = cargar_datos(archivo3)
-# datos4 = cargar_datos(archivo4)
-
-# tabla_bias = generar_tabla_latex("bias", datos1, datos2, datos3, datos4)
-# tabla_rmse = generar_tabla_latex("rmse", datos1, datos2, datos3, datos4)
-# with open(f'/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/tablas/tabla_{n}.txt', 'w') as f:
-#     f.write(tabla_bias)
-#     f.write("\n\n")      
-#     f.write(tabla_rmse)  
 
 
 gen_all_tables()
@@ -147,17 +129,17 @@ n & $\lambda_Y$ & $\hat{\eta}_{sd}^{NonP}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}
 
 # Archivos JSON para lambda = 0.5 y lambda = 1
 archivos_lambda_05 = [
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/no_parametrico/jsons/tabla_V_05_no_param.json',  # NonParametric
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/parametrico/jsons/tabla_V_05_param.json',  # N
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_paquete/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json',  # K, h=csv
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_optimo/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json'   # K, h=h*
+    './no_parametrico/jsons/tabla_V_05_no_param.json',  # NonParametric
+    './parametrico/jsons/tabla_V_05_param.json',  # N
+    './kernel/gaussiano/h_paquete/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json',  # K, h=csv
+    './kernel/gaussiano/h_optimo/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json'   # K, h=h*
 ]
 
 archivos_lambda_1 = [
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/no_parametrico/jsons/tabla_V_1_no_param.json',  # NonParametric
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/parametrico/jsons/tabla_V_1_param.json',  # N
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_paquete/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json',  # K, h=csv
-    '/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/kernel/gaussiano/h_optimo/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json'   # K, h=h*
+    './no_parametrico/jsons/tabla_V_1_no_param.json',  # NonParametric
+    './parametrico/jsons/tabla_V_1_param.json',  # N
+    './kernel/gaussiano/h_paquete/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json',  # K, h=csv
+    './kernel/gaussiano/h_optimo/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json'   # K, h=h*
 ]
 
 datos_lambda_05 = [cargar_datos(archivo) for archivo in archivos_lambda_05]
@@ -169,7 +151,7 @@ tabla_bias = generar_tabla_5(datos_lambda_05, datos_lambda_1, "bias", titulo_bia
 titulo_rmse = r"Simulación de $RMSE$ de \textbf{$\hat{\eta}_{sd}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$"
 tabla_rmse = generar_tabla_5(datos_lambda_05, datos_lambda_1, "rmse", titulo_rmse)
 
-with open('/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/tablas/tabla_V.txt', 'w') as f:
+with open('./tablas/tabla_V.txt', 'w') as f:
     f.write(tabla_bias)
     f.write("\n\n")
     f.write(tabla_rmse)
@@ -189,17 +171,16 @@ def unir_archivos_txt(ruta_carpeta, archivo_salida):
             if os.path.exists(ruta_archivo):
                 with open(ruta_archivo, 'r') as archivo:
                     contenido = archivo.read()
-                    # archivo_final.write(f"% Contenido de {nombre_archivo}\n")  # Agrega un comentario con el nombre del archivo
                     archivo_final.write(contenido)
-                    archivo_final.write("\n\n")  # Espacio entre tablas
+                    archivo_final.write("\n\n")
             else:
                 print(f"Advertencia: El archivo {nombre_archivo} no existe.")
 
 # Ruta de la carpeta donde están los archivos .txt
-ruta_carpeta = "/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/tablas"
+ruta_carpeta = "./tablas"
 
 # Nombre del archivo de salida
-archivo_salida = "/Users/Riki/Desktop/ucm/TFGs/Mates/codigo/codigo_final/tablas/tablas_simulacion.txt"
+archivo_salida = "./tablas/tablas_simulacion.txt"
 
 # Llamar a la función para unir los archivos
 unir_archivos_txt(ruta_carpeta, archivo_salida)
