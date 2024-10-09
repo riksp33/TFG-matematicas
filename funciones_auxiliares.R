@@ -33,26 +33,16 @@ ObtenerMux = function(AUC , sigmax , sigmay , muy){
 eta_poblacional_I = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
+  point = p_opp
   
-  etas = numeric(mesh_size)
-  
-  for (i in (1:mesh_size)) {
-    point = p_opp[i]
-    
-    inv = qnorm(point, 2.5, sqrt(0.25))
-    numerador = dnorm(inv, mux, sqrt(0.25))
-    denominador = dnorm(inv, 2.5, sqrt(0.25))
-    eta = numerador/denominador
-    etas[i] = eta
-  }
-  
+  inv = qnorm(point, 2.5, sqrt(0.25))
+  numerador = dnorm(inv, mux, sqrt(0.25))
+  denominador = dnorm(inv, 2.5, sqrt(0.25))
+  etas = numerador/denominador
+
   integrando = (etas -1)^2
   base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
+  integral = sum(integrando) * base
   
   return(integral/(integral + 1))
 }
@@ -60,26 +50,16 @@ eta_poblacional_I = function(mux, mesh_size = m){
 eta_poblacional_II = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
-  
-  etas = numeric(mesh_size)
-  
-  for (i in (1:mesh_size)) {
-    point = p_opp[i]
+  point = p_opp
     
-    inv = qnorm(point, 2.5, sqrt(0.09))
-    numerador = dnorm(inv, mux, sqrt(0.25))
-    denominador = dnorm(inv, 2.5, sqrt(0.09))
-    eta = numerador/denominador
-    etas[i] = eta
-  }
+  inv = qnorm(point, 2.5, sqrt(0.09))
+  numerador = dnorm(inv, mux, sqrt(0.25))
+  denominador = dnorm(inv, 2.5, sqrt(0.09))
+  etas = numerador/denominador
   
   integrando = (etas -1)^2
   base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
+  integral = sum(integrando) * base
   
   return(integral/(integral + 1))
 }
@@ -87,26 +67,16 @@ eta_poblacional_II = function(mux, mesh_size = m){
 eta_poblacional_III = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
+  point = p_opp
   
-  etas = numeric(mesh_size)
-  
-  for (i in (1:mesh_size)) {
-    point = p_opp[i]
-    
-    inv = qnorm(point, 2.5, sqrt(0.09))^3
-    numerador = dnorm(inv^(1/3), mux, sqrt(0.25)) * (1/3) * (inv^(-2/3))
-    denominador = dnorm(inv^(1/3), 2.5, sqrt(0.09))* (1/3) * (inv^(-2/3))
-    eta = numerador/denominador
-    etas[i] = eta
-  }
-  
+  inv = qnorm(point, 2.5, sqrt(0.09))^3
+  numerador = dnorm(inv^(1/3), mux, sqrt(0.25)) * (1/3) * (inv^(-2/3))
+  denominador = dnorm(inv^(1/3), 2.5, sqrt(0.09))* (1/3) * (inv^(-2/3))
+  etas = numerador/denominador
+
   integrando = (etas -1)^2
   base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
+  integral = sum(integrando) * base
   
   return(integral/(integral + 1))
 }
@@ -114,79 +84,49 @@ eta_poblacional_III = function(mux, mesh_size = m){
 eta_poblacional_IV = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
+  point = p_opp
   
-  etas = numeric(mesh_size)
-  
-  for (i in (1:mesh_size)) {
-    point = p_opp[i]
-    
-    inv = qlnorm(point, 2.5, sqrt(0.25))
-    numerador = dlnorm(inv, mux, sqrt(0.09))
-    denominador = dlnorm(inv, 2.5, sqrt(0.25))
-    eta = numerador/denominador
-    etas[i] = eta
-  }
-  
+  inv = qlnorm(point, 2.5, sqrt(0.25))
+  numerador = dlnorm(inv, mux, sqrt(0.09))
+  denominador = dlnorm(inv, 2.5, sqrt(0.25))
+  etas= numerador/denominador
+
   integrando = (etas -1)^2
   base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
-  
+  integral = sum(integrando)*base
+
   return(integral/(integral + 1))
 }
 eta_poblacional_V_05 = function(mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
+  point = p_opp
   
-  etas = numeric(mesh_size)
-  
-  for (i in (1:mesh_size)) {
-    point = p_opp[i]
-    
-    inv = qgamma(point, shape = 2, rate = 0.5)
-    numerador = dgamma(point, shape = 2, rate = 0.12)
-    denominador = dgamma(inv, shape = 2, rate = 0.5)
-    eta = numerador/denominador
-    etas[i] = eta
-  }
+  inv = qgamma(point, shape = 2, rate = 0.5)
+  numerador = dgamma(point, shape = 2, rate = 0.12)
+  denominador = dgamma(inv, shape = 2, rate = 0.5)
+  etas = numerador/denominador
   
   integrando = (etas -1)^2
   base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
-  
+  integral = sum(integrando) * base
+
   return(integral/(integral + 1))
 }
 
 eta_poblacional_V_1 = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
+  point = p_opp
   
-  etas = numeric(mesh_size)
-  
-  for (i in (1:mesh_size)) {
-    point = p_opp[i]
-    
-    inv = qgamma(point, shape = 2, rate = 1)
-    numerador = dgamma(point, shape = 2, rate = 0.24)
-    denominador = dgamma(inv, shape = 2, rate = 1)
-    eta = numerador/denominador
-    etas[i] = eta
-  }
+  inv = qgamma(point, shape = 2, rate = 1)
+  numerador = dgamma(point, shape = 2, rate = 0.24)
+  denominador = dgamma(inv, shape = 2, rate = 1)
+  etas = numerador/denominador
   
   integrando = (etas -1)^2
   base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
+  integral = sum(integrando)*base
   
   return(integral/(integral + 1))
 }
@@ -199,10 +139,10 @@ eta_poblacional_VI = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
-    
-    inv = qnorm(point, 0, 1)                                
-    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-    denominador = dnorm(inv, 0, 1)
+  
+  inv = qnorm(point, 0, 1)                                
+  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+  denominador = dnorm(inv, 0, 1)
     eta = numerador/denominador
     etas[i] = eta
   }
@@ -225,10 +165,10 @@ eta_poblacional_VII = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
-    
-    inv = qnorm(point, 0, 1)                                
-    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-    denominador = dnorm(inv, 0, 1)
+  
+  inv = qnorm(point, 0, 1)                                
+  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+  denominador = dnorm(inv, 0, 1)
     eta = numerador/denominador
     etas[i] = eta
   }
@@ -239,7 +179,7 @@ eta_poblacional_VII = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   for (eta in integrando) {
     integral = integral + (eta*base)
   }
-  
+
   return(integral/(integral + 1))
 }
 
@@ -251,10 +191,10 @@ eta_poblacional_VIII = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
-    
-    inv = CuantilMixtura(point, 0, 3, 1, 1, 0.5)                               
-    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-    denominador = DensidadMixtura(inv, 0, 3, 1, 1, 0.5)
+  
+  inv = CuantilMixtura(point, 0, 3, 1, 1, 0.5)                               
+  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+  denominador = DensidadMixtura(inv, 0, 3, 1, 1, 0.5)
     eta = numerador/denominador
     etas[i] = eta
   }
@@ -277,10 +217,10 @@ eta_poblacional_IX = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
-    
-    inv = CuantilMixtura(point, 0, 3, 1, sqrt(1.5), 0.5)                               
-    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-    denominador = DensidadMixtura(inv, 0, 3, 1, sqrt(1.5), 0.5)
+  
+  inv = CuantilMixtura(point, 0, 3, 1, sqrt(1.5), 0.5)                               
+  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+  denominador = DensidadMixtura(inv, 0, 3, 1, sqrt(1.5), 0.5)
     eta = numerador/denominador
     etas[i] = eta
   }
