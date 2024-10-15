@@ -64,7 +64,7 @@ def gen_all_tables():
     for n in ns:
         archivo1 = f'./no_parametrico/jsons/tabla_{n}_no_param.json'  # NonParametric (contiene eta_pob)
         archivo2 = f'./parametrico/jsons/tabla_{n}_param.json'  # N
-        archivo3 = f'./kernel/gaussiano/h_paquete/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=csv
+        archivo3 = f'./kernel/gaussiano/h_paquete/jsons/tabla_{n}_kernel_h_funcion_gaussiano.json'  # K = g, h=csv
         archivo4 = f'./kernel/gaussiano/h_optimo/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=h*  
 
         datos1 = cargar_datos(archivo1)
@@ -131,14 +131,14 @@ n & $\lambda_Y$ & $\hat{\eta}_{sd}^{NonP}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}
 archivos_lambda_05 = [
     './no_parametrico/jsons/tabla_V_05_no_param.json',  # NonParametric
     './parametrico/jsons/tabla_V_05_param.json',  # N
-    './kernel/gaussiano/h_paquete/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json',  # K, h=csv
+    './kernel/gaussiano/h_paquete/jsons/tabla_V_05_kernel_h_funcion_gaussiano.json',  # K, h=csv
     './kernel/gaussiano/h_optimo/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json'   # K, h=h*
 ]
 
 archivos_lambda_1 = [
     './no_parametrico/jsons/tabla_V_1_no_param.json',  # NonParametric
     './parametrico/jsons/tabla_V_1_param.json',  # N
-    './kernel/gaussiano/h_paquete/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json',  # K, h=csv
+    './kernel/gaussiano/h_paquete/jsons/tabla_V_1_kernel_h_funcion_gaussiano.json',  # K, h=csv
     './kernel/gaussiano/h_optimo/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json'   # K, h=h*
 ]
 

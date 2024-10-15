@@ -16,3 +16,8 @@ roc_plot = function(Y, X){
 
 
 
+get_auc = function(Y,X){
+  n = length(Y)
+  auc = as.numeric(pROC::auc(response = c(rep(1, n), rep(0, n)),
+                             predictor = c(Y, X)))
+}
