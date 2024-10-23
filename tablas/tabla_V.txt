@@ -1,19 +1,19 @@
 
 \begin{table}[H]
 \centering
-\caption{Simulación de Bias de \textbf{$\hat{\eta}_{sd}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$}
+\caption{Simulación de Bias de \textbf{$\hat{\eta}_{log}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$}
 \setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
 \begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
 \toprule
-n & $\lambda_Y$ & $\hat{\eta}_{sd}^{NonP}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K, h=csv}$ & $\hat{\eta}_{sd}^{K, h*}$ \\
+n & $\lambda_Y$ & $\hat{\eta}_{log}^{NonP}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K, h=csv}$ & $\hat{\eta}_{log}^{K, h*}$ \\
 \midrule
-20 & 0.5 & -0.7032 & 0.0325 & 0.1025 & 0.1027 \\
-50 & 0.5 & -0.7579 & 0.0326 & 0.1026 & 0.1027 \\
-100 & 0.5 & -0.7929 & 0.0327 & 0.1026 & 0.1027 \\
+20 & 0.5 & -0.6532 & -0.0100 & -0.0786 & -0.0762 \\
+50 & 0.5 & -0.7251 & -0.0086 & -0.0862 & -0.0799 \\
+100 & 0.5 & -0.7691 & -0.0082 & -0.0926 & -0.0843 \\
 \midrule
-20 & 1 & -0.7032 & 0.0325 & 0.0361 & 0.0363 \\
-50 & 1 & -0.7579 & 0.0326 & 0.0362 & 0.0365 \\
-100 & 1 & -0.7929 & 0.0327 & 0.0361 & 0.0365 \\
+20 & 1 & -0.6532 & -0.0100 & -0.0786 & -0.0762 \\
+50 & 1 & -0.7251 & -0.0086 & -0.0862 & -0.0799 \\
+100 & 1 & -0.7691 & -0.0082 & -0.0926 & -0.0843 \\
 
 \bottomrule
 \end{tabularx}
@@ -24,19 +24,19 @@ n & $\lambda_Y$ & $\hat{\eta}_{sd}^{NonP}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}
 
 \begin{table}[H]
 \centering
-\caption{Simulación de $RMSE$ de \textbf{$\hat{\eta}_{sd}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$}
+\caption{Simulación de $RMSE$ de \textbf{$\hat{\eta}_{log}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$}
 \setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
 \begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
 \toprule
-n & $\lambda_Y$ & $\hat{\eta}_{sd}^{NonP}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K, h=csv}$ & $\hat{\eta}_{sd}^{K, h*}$ \\
+n & $\lambda_Y$ & $\hat{\eta}_{log}^{NonP}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K, h=csv}$ & $\hat{\eta}_{log}^{K, h*}$ \\
 \midrule
-20 & 0.5 & 0.7076 & 0.0325 & 0.1025 & 0.1027 \\
-50 & 0.5 & 0.7605 & 0.0326 & 0.1026 & 0.1027 \\
-100 & 0.5 & 0.7947 & 0.0327 & 0.1026 & 0.1027 \\
+20 & 0.5 & 0.6612 & 0.0115 & 0.0803 & 0.0779 \\
+50 & 0.5 & 0.7294 & 0.0089 & 0.0873 & 0.0808 \\
+100 & 0.5 & 0.7719 & 0.0084 & 0.0937 & 0.0850 \\
 \midrule
-20 & 1 & 0.7076 & 0.0325 & 0.0361 & 0.0363 \\
-50 & 1 & 0.7605 & 0.0326 & 0.0362 & 0.0365 \\
-100 & 1 & 0.7947 & 0.0327 & 0.0361 & 0.0365 \\
+20 & 1 & 0.6612 & 0.0115 & 0.0803 & 0.0779 \\
+50 & 1 & 0.7294 & 0.0089 & 0.0873 & 0.0808 \\
+100 & 1 & 0.7719 & 0.0084 & 0.0937 & 0.0850 \\
 
 \bottomrule
 \end{tabularx}

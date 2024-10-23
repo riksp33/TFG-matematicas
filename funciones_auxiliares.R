@@ -27,6 +27,10 @@ ObtenerMux = function(AUC , sigmax , sigmay , muy){
   return(mux)
 }
 
+estandarizacion = function(x) {
+  return(log(x +1)/ (1 + log(x+1)) )
+}
+
 ################################################################################
 # FUNCIONES PARA GENERAR LOS ETAS REALES
 eta_pob_sd_stable = function(roc, roc_prima, mesh){
@@ -42,7 +46,8 @@ eta_pob_sd_stable = function(roc, roc_prima, mesh){
     )
   }
   eta = sum(etas)
-  return(eta/(eta+1))
+  return(estandarizacion(eta)
+ )
 }
 
 eta_poblacional_I = function(mux, mesh_size = m){
@@ -336,7 +341,8 @@ EtaEmpirica = function(control , casos){
   
   eta = sum((aux/n_d_bar - 1/(n_d_bar + 1))^2)
   
-  return(eta/(1+eta))
+  return(estandarizacion(eta)
+)
 }
 
 ################################################################################
@@ -356,7 +362,8 @@ EtaBinormal=function(controles,casos,p=seq(0.00001,0.99999,length.out=10000)){
     etaaux[k]=ifelse(ROCprima[k]<=1,(ROCprima[k]-1)^2*(p[k]-p[k-1]),(ROCprima[k]-1)^2/(ROCprima[k])*(ROC[k]-ROC[k-1]))
   }
   eta=sum(etaaux)
-  return(eta/(1+eta))
+  return(estandarizacion(eta)
+)
 }
 
 ################################################################################
@@ -441,28 +448,35 @@ EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000){
   p = seq(0.0001,0.999, length.out = mesh_size)
   p_opp = 1-p
   
-  etas = numeric(mesh_size)
+  # etas = numeric(mesh_size)
+  roc = numeric(mesh_size)
+  roc_prima = numeric(mesh_size)
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
     
     inv = Inverse(point, estimated_dist_sanos, mesh)
-    
     numerador = Evaluate(inv, estimated_dens_enfermos, mesh)
     denominador = Evaluate(inv, estimated_dens_sanos, mesh)
-    eta = numerador/denominador
-    etas[i] = eta
     
+    roc[i] = 1 - Evaluate(inv, estimated_dist_enfermos, mesh)
+    roc_prima[i] = numerador / denominador
+    
+    # eta = numerador/denominador
+    # etas[i] = eta
+    # 
   }
   
+  return(eta_pob_sd_stable(roc, roc_prima, p))
   
-  integrando = (etas -1)^2
-  base = mesh[2]-mesh[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-    
-  }
-  return(integral/(integral + 1))
+  # integrando = (etas -1)^2
+  # base = mesh[2]-mesh[1]
+  # 
+  # integral = 0
+  # for (eta in integrando) {
+  #   integral = integral + (eta*base)
+  #   
+  # }
+  # return(estandarizacion(eta)
+ 
 }

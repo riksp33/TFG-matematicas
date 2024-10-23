@@ -1,3 +1,4 @@
+
 directorio = here('no_parametrico', 'Scripts')
 scripts = list.files(path = directorio, pattern = "\\.R$", full.names = TRUE)
 

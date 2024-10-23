@@ -51,7 +51,6 @@ SimulateBiasRMSE = function(AUCs , tamaños){
 
 
 set.seed(1)
-AUCs = c( 0.9)
 ns = c(20 , 50 , 100)
-SimulateBiasRMSE(AUCs , ns)
+SimulateBiasRMSE(c(0.9) , ns)
 
