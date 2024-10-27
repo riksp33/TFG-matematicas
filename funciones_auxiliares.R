@@ -347,7 +347,56 @@ EtaEmpirica = function(control , casos){
 
 ################################################################################
 # FUNCIONES PARA ESTIMACION PARAMETRICA
-EtaBinormal=function(controles,casos,p=seq(0.00001,0.99999,length.out=10000)){
+
+HacerBoxCox = function(xo, yo, P =F){
+  number_negative_obs = sum(xo <= 0) + sum(yo <= 0)
+  if (number_negative_obs > 0 ) {
+    constant = -min(min(xo) , min(yo)) + 5e-4
+    xo = xo + constant
+    yo = yo + constant
+  }
+  likbox=function(h,data,n){
+    m=length(data)-n
+    x=data[1:n]
+    y=data[(n+1):length(data)]
+    if (abs(h)<1e-5){
+      xh=log(x)
+      yh=log(y)
+    } else {
+      xh=((x^h)-1)/h
+      yh=((y^h)-1)/h
+    }
+    oout=-n/2*log(sum((xh-sum(xh)/n)^2)/n)-m/2*log(sum((yh-sum(yh)/m)^2)/m) +(h-1)*(sum(log(x))+sum(log(y)))
+    return(-oout)
+  }
+  
+  h_ini=-0.6
+  hhat=optim(h_ini,likbox,data=c(xo,yo),n=length(xo),method="BFGS")$par
+  if (abs(hhat)<1e-5){
+    muestra1=log(xo)
+    muestra2=log(yo)
+  } else {
+    muestra1=((xo^hhat)-1)/hhat
+    muestra2=((yo^hhat)-1)/hhat
+  }
+  
+  if (P) {
+    cat('El lambda de la transformada es: ', hhat, '\n')
+  }
+  df = data.frame(muestra1,muestra2)
+  return(df)
+}
+
+
+EtaBinormal=function(controles,casos, bc = F, p=seq(0.00001,0.99999,length.out=10000)){
+  
+  if (bc) {
+    df_trans = HacerBoxCox(controles, casos)
+    controles = df_trans$muestra1
+    casos = df_trans$muestra2
+  }
+  
+  
   mux=mean(controles)
   muy=mean(casos)
   sigmax=sd(controles)
@@ -480,3 +529,35 @@ EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000){
   # return(estandarizacion(eta)
  
 }
+
+##################################################################
+# FUNCIÓN PARA ENCONTRAR EL RATE ADECUADO PARA EL VALOR DE AUC
+
+ObtenerRateGamma = function(Y_pob, rate_x, auc_target, tol = 0.01, max_iter = 100){
+  lower = 0
+  upper = 15
+  iter = 0
+  
+  while(iter < max_iter){
+    bisectriz = (lower + upper) / 2
+    iter = iter + 1
+    set.seed(1)
+    # Muestra de X
+    X_pob = rgamma(1e5, shape = bisectriz, rate = rate_x)
+    auc_iter = as.numeric(pROC::auc(response = c(rep(1, 1e5), rep(0, 1e5)), predictor = c(Y_pob, X_pob)))
+    cat('AUC iteración ', iter, ': ', auc_iter, '\n')
+    
+    if(abs(auc_iter - auc_target) < tol){
+      return(bisectriz)
+    }
+    if(auc_iter > auc_target){
+      upper = bisectriz
+    }
+    if(auc_iter < auc_target){
+      lower = bisectriz
+    }
+    
+  }
+  return(F)
+}
+

@@ -1,0 +1,52 @@
+
+\begin{table}[H]
+\centering
+\caption{Simulación de Bias para diferentes tamaños muestrales de prueba prueba prueba}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &-0.6851 & -0.2673 & -0.1411 & -0.1228 \\
+0.775824 & 50 & -0.7245 & -0.2746 & -0.1742 & -0.1202 \\
+ & 100 &-0.7425 & -0.2644 & -0.2187 & -0.1465 \\
+\midrule
+ & 20 &-0.6921 & -0.1823 & -0.0904 & -0.0778 \\
+0.829169 & 50 & -0.7376 & -0.1572 & -0.1214 & -0.0854 \\
+ & 100 &-0.7629 & -0.1450 & -0.1549 & -0.1004 \\
+\midrule
+ & 20 &-0.6342 & -0.0985 & -0.0921 & -0.0791 \\
+0.871872 & 50 & -0.6791 & -0.0834 & -0.1084 & -0.0813 \\
+ & 100 &-0.7126 & -0.0762 & -0.1277 & -0.0869 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
+
+
+
+\begin{table}[H]
+\centering
+\caption{Simulación de $RMSE$ para diferentes tamaños muestrales de prueba prueba prueba}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &0.6859 & 0.3506 & 0.2092 & 0.2110 \\
+0.775824 & 50 & 0.7247 & 0.3239 & 0.2015 & 0.1527 \\
+ & 100 &0.7426 & 0.2955 & 0.2336 & 0.1645 \\
+\midrule
+ & 20 &0.6940 & 0.2457 & 0.1070 & 0.1062 \\
+0.829169 & 50 & 0.7384 & 0.1923 & 0.1287 & 0.0950 \\
+ & 100 &0.7633 & 0.1655 & 0.1604 & 0.1064 \\
+\midrule
+ & 20 &0.6374 & 0.1314 & 0.0945 & 0.0818 \\
+0.871872 & 50 & 0.6810 & 0.0995 & 0.1105 & 0.0826 \\
+ & 100 &0.7138 & 0.0861 & 0.1299 & 0.0879 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}

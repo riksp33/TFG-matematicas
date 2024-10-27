@@ -1,7 +1,7 @@
 
 \begin{table}[H]
 \centering
-\caption{Simulación de Bias para diferentes tamaños muestrales de $\log(Y) \sim N(2.5, 0.25)$, $\log(X) \sim N(\mu_x, 0.09)$}
+\caption{Simulación de Bias para diferentes tamaños muestrales de $\log(Y) \sim N(0, 1)$, $\log(X) \sim N(\mu_x, 0.5)$}
 \setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
 \begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
 \toprule
@@ -28,7 +28,7 @@ $\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ &
 
 \begin{table}[H]
 \centering
-\caption{Simulación de $RMSE$ para diferentes tamaños muestrales de $\log(Y) \sim N(2.5, 0.25)$, $\log(X) \sim N(\mu_x, 0.09)$}
+\caption{Simulación de $RMSE$ para diferentes tamaños muestrales de $\log(Y) \sim N(0, 1)$, $\log(X) \sim N(\mu_x, 0.5)$}
 \setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
 \begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
 \toprule
