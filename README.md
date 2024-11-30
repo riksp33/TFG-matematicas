@@ -2,11 +2,11 @@
 
 ## Resumen
 
-El objetivo del código de este repositorio es la realización de un estudio de simulación para el estadístico eta presentado en "NON PARAMETRIC ROC SUMMARY STATISTICS" por MC. Pardo y AM. Franco. junto a otros métodos de estimación. En el análisis se han comprobado resultados de sesgo y RMSE así como potencias y niveles del test estadístico que toma como H0 que el clasificador es no informativo.
+El objetivo del código de este repositorio es la realización de un estudio de simulación para el estadístico eta presentado en **"NON PARAMETRIC ROC SUMMARY STATISTICS"** por MC. Pardo y AM. Franco. junto a otros métodos de estimación. En el análisis se han comprobado resultados de sesgo y RMSE así como potencias y niveles del test estadístico que toma como H0 que el clasificador es no informativo.
 
 ## Sesgo y RMSE
 
-Los cáclulos de sesgo y RMSE se realizan en los scripts de la carpeta `bias_rmse`. Se han realizado un tamaño de montecarlo de 1000, para poblaciones de tamaño 20,50,100 y ajustes de parámetro que resulten en AUC = 0.6, 0.75 y 0.9
+Los cáclulos de sesgo y RMSE se realizan en los scripts de la carpeta `bias_rmse`. Se han realizado un tamaño de montecarlo de 1000, para poblaciones de tamaño 20, 50, 100 y ajustes de parámetros que resulten en AUC = 0.6, 0.75 y 0.9
 
 Para lanzar los escenarios es primero correr el script `package_manager.R` para instalar las dependencias. Para lanzar las simulaciones simplemente hay que ejecutar el script `bias_rmse/simulate_all.R`. Los resultados se almacenarán en archivos JSON para ser transformados a trablas de latex en un .txt con el script de python `bias_rmse/table_generator.py`
 
