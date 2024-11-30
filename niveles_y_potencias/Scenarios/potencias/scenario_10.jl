@@ -15,7 +15,7 @@ function potencia_escenario_10()
     alpha = 0.05
     n_values = [20, 50, 100]
 
-    results = Dict("title" => "Resultados de nivel del test para distintos tamaños muestrales. Escenario 10")
+    results = Dict{Any, Any}("title" => "Resultados de nivel del test para distintos tamaños muestrales. Escenario 10")
 
     for n in n_values
         p_val_auc = Vector{Float64}(undef, MC)
