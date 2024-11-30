@@ -1,4 +1,5 @@
 import json
+import os
 
 def cargar_datos(archivo):
     with open(archivo, 'r') as f:
@@ -6,29 +7,39 @@ def cargar_datos(archivo):
 
 def generar_tabla_latex(tipo, datos1, datos2, datos3, datos4, titulo):
 
+    if tipo == 'rmse':
+        tipo_titulo = '$RMSE$'
+    else:
+        tipo_titulo = 'Bias'
+
+
     tabla = r'''
 \begin{table}[H]
 \centering
-\caption{Simulación de ''' + tipo + r''' para tamaños muestrales de ''' +  titulo + r'''}
+\caption{Simulación de ''' + tipo_titulo + r''' para diferentes tamaños muestrales de ''' +  titulo + r'''}
 \setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
 \begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
 \toprule
 '''
-    if 'eta_pob' in datos1['AUC:0.7']['size:20']:
-        tabla += "n & $\\eta_{sd}$ & $\hat{\eta}_{sd}^{NonParametric}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K = g, h=csv}$ & $\hat{\eta}_{sd}^{K = g, h = h*}$ \\\\\n"
+    if 'eta_pob' in datos1['AUC:0.6']['size:20']:
+        tabla += "$\\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\\\\n"
     else:
-        tabla += "n & AUC & $\hat{\eta}_{sd}^{NonParametric}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K = g, h=csv}$ & $\hat{\eta}_{sd}^{K = g, h = h*}$ \\\\\n"
+        tabla += "n & AUC & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\\\\n"
     
     tabla += "\\midrule\n"
 
-    aucs = ["0.7", "0.8", "0.9"]
+    aucs = ["0.6", "0.75", "0.9"]
     sizes = ["20", "50", "100"]
     
-    for size in sizes:
-        for auc in aucs:
+    for  auc in aucs:  
+        for index, size in enumerate(sizes):  
             if 'eta_pob' in datos1[f'AUC:{auc}'][f'size:{size}']:
                 eta_pob = datos1[f'AUC:{auc}'][f'size:{size}']['eta_pob'][0]
-                tabla += f"{size} & {eta_pob:.6f} & "
+                if index != 1:
+                    tabla += f' & {size} &'
+                else:
+                    tabla += f"{eta_pob:.6f} & {size} & "
+
             else:
                 tabla += f"{size} & {auc} & "
 
@@ -37,7 +48,7 @@ def generar_tabla_latex(tipo, datos1, datos2, datos3, datos4, titulo):
             tabla += f"{datos3[f'AUC:{auc}'][f'size:{size}'][tipo][0]:.4f} & "
             tabla += f"{datos4[f'AUC:{auc}'][f'size:{size}'][tipo][0]:.4f} \\\\\n"
         
-        tabla += "\\midrule\n"
+        tabla += "\\midrule\n"  
 
     tabla += r'''
 \end{tabularx}
@@ -45,6 +56,7 @@ def generar_tabla_latex(tipo, datos1, datos2, datos3, datos4, titulo):
 \end{table}
 '''
     return tabla
+
 
 
 def gen_all_tables():
@@ -64,7 +76,7 @@ def gen_all_tables():
     for n in ns:
         archivo1 = f'./no_parametrico/jsons/tabla_{n}_no_param.json'  # NonParametric (contiene eta_pob)
         archivo2 = f'./parametrico/jsons/tabla_{n}_param.json'  # N
-        archivo3 = f'./kernel/gaussiano/h_paquete/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=csv
+        archivo3 = f'./kernel/gaussiano/h_paquete/jsons/tabla_{n}_kernel_h_funcion_gaussiano.json'  # K = g, h=csv
         archivo4 = f'./kernel/gaussiano/h_optimo/jsons/tabla_{n}_kernel_h_optimo_gaussiano.json'  # K = g, h=h*  
 
         datos1 = cargar_datos(archivo1)
@@ -94,7 +106,7 @@ def generar_tabla_5(datos_lambda_05, datos_lambda_1, tipo, titulo):
 \setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
 \begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
 \toprule
-n & $\lambda_Y$ & $\hat{\eta}_{sd}^{NonP}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}_{sd}^{K, h=csv}$ & $\hat{\eta}_{sd}^{K, h*}$ \\
+n & $\lambda_Y$ & $\hat{\eta}_{log}^{NonP}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K, h=csv}$ & $\hat{\eta}_{log}^{K, h*}$ \\
 \midrule
 '''
 
@@ -131,24 +143,24 @@ n & $\lambda_Y$ & $\hat{\eta}_{sd}^{NonP}$ & $\hat{\eta}_{sd}^{N}$ & $\hat{\eta}
 archivos_lambda_05 = [
     './no_parametrico/jsons/tabla_V_05_no_param.json',  # NonParametric
     './parametrico/jsons/tabla_V_05_param.json',  # N
-    './kernel/gaussiano/h_paquete/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json',  # K, h=csv
+    './kernel/gaussiano/h_paquete/jsons/tabla_V_05_kernel_h_funcion_gaussiano.json',  # K, h=csv
     './kernel/gaussiano/h_optimo/jsons/tabla_V_05_kernel_h_optimo_gaussiano.json'   # K, h=h*
 ]
 
 archivos_lambda_1 = [
     './no_parametrico/jsons/tabla_V_1_no_param.json',  # NonParametric
     './parametrico/jsons/tabla_V_1_param.json',  # N
-    './kernel/gaussiano/h_paquete/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json',  # K, h=csv
+    './kernel/gaussiano/h_paquete/jsons/tabla_V_1_kernel_h_funcion_gaussiano.json',  # K, h=csv
     './kernel/gaussiano/h_optimo/jsons/tabla_V_1_kernel_h_optimo_gaussiano.json'   # K, h=h*
 ]
 
 datos_lambda_05 = [cargar_datos(archivo) for archivo in archivos_lambda_05]
 datos_lambda_1 = [cargar_datos(archivo) for archivo in archivos_lambda_1]
 
-titulo_bias = r"Simulación de Bias de \textbf{$\hat{\eta}_{sd}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$"
+titulo_bias = r"Simulación de Bias de \textbf{$\hat{\eta}_{log}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$"
 tabla_bias = generar_tabla_5(datos_lambda_05, datos_lambda_1, "bias", titulo_bias)
 
-titulo_rmse = r"Simulación de $RMSE$ de \textbf{$\hat{\eta}_{sd}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$"
+titulo_rmse = r"Simulación de $RMSE$ de \textbf{$\hat{\eta}_{log}$} para tamaños muestrales y valor de AUC 0.9: $Y \sim \gamma(\lambda_Y,\ \alpha_Y = 2)$, $X \sim \gamma(\lambda_X,\ \alpha_X = 2)$"
 tabla_rmse = generar_tabla_5(datos_lambda_05, datos_lambda_1, "rmse", titulo_rmse)
 
 with open('./tablas/tabla_V.txt', 'w') as f:
@@ -156,9 +168,6 @@ with open('./tablas/tabla_V.txt', 'w') as f:
     f.write("\n\n")
     f.write(tabla_rmse)
 
-
-
-import os
 
 def unir_archivos_txt(ruta_carpeta, archivo_salida):
     patrones = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
@@ -176,13 +185,8 @@ def unir_archivos_txt(ruta_carpeta, archivo_salida):
             else:
                 print(f"Advertencia: El archivo {nombre_archivo} no existe.")
 
-# Ruta de la carpeta donde están los archivos .txt
 ruta_carpeta = "./tablas"
-
-# Nombre del archivo de salida
-archivo_salida = "./tablas/tablas_simulacion.txt"
-
-# Llamar a la función para unir los archivos
+archivo_salida = "./tablas/tablas_simulacion_altered.txt"
 unir_archivos_txt(ruta_carpeta, archivo_salida)
 
 print(f"Archivo combinado creado: {archivo_salida}")

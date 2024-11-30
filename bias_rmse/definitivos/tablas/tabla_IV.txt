@@ -1,0 +1,52 @@
+
+\begin{table}[H]
+\centering
+\caption{Simulación de Bias para diferentes tamaños muestrales de $\log(Y) \sim N(0, 1)$, $\log(X) \sim N(\mu_x, 0.5)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &-0.2007 & 0.0144 & -0.0203 & -0.0333 \\
+0.314686 & 50 & -0.2595 & 0.0013 & -0.0259 & -0.0394 \\
+ & 100 &-0.2847 & 0.0030 & -0.0198 & -0.0326 \\
+\midrule
+ & 20 &-0.2881 & 0.0241 & -0.0159 & -0.0341 \\
+0.424723 & 50 & -0.3544 & 0.0083 & -0.0195 & -0.0365 \\
+ & 100 &-0.3866 & 0.0013 & -0.0210 & -0.0352 \\
+\midrule
+ & 20 &-0.3988 & 0.0339 & -0.0101 & -0.0341 \\
+0.613372 & 50 & -0.4834 & 0.0130 & -0.0100 & -0.0329 \\
+ & 100 &-0.5351 & 0.0063 & -0.0077 & -0.0284 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
+
+
+
+\begin{table}[H]
+\centering
+\caption{Simulación de $RMSE$ para diferentes tamaños muestrales de $\log(Y) \sim N(0, 1)$, $\log(X) \sim N(\mu_x, 0.5)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &0.2048 & 0.1034 & 0.1001 & 0.0957 \\
+0.314686 & 50 & 0.2601 & 0.0597 & 0.0685 & 0.0708 \\
+ & 100 &0.2847 & 0.0444 & 0.0526 & 0.0558 \\
+\midrule
+ & 20 &0.2922 & 0.0986 & 0.1028 & 0.1015 \\
+0.424723 & 50 & 0.3551 & 0.0576 & 0.0676 & 0.0709 \\
+ & 100 &0.3867 & 0.0403 & 0.0517 & 0.0566 \\
+\midrule
+ & 20 &0.4046 & 0.0922 & 0.0927 & 0.1013 \\
+0.613372 & 50 & 0.4855 & 0.0543 & 0.0647 & 0.0716 \\
+ & 100 &0.5356 & 0.0368 & 0.0462 & 0.0518 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}

@@ -1,8 +1,8 @@
 library(jsonlite)
 library(ks)
 
-l = 0.0001
-u = 0.9999
+l = 0.000001
+u = 0.999999
 m = 100000
 
 ################################################################################
@@ -27,212 +27,190 @@ ObtenerMux = function(AUC , sigmax , sigmay , muy){
   return(mux)
 }
 
+estandarizacion = function(x) {
+  return(log(x +1)/ (1 + log(x+1)) )
+}
+
 ################################################################################
 # FUNCIONES PARA GENERAR LOS ETAS REALES
+eta_pob_sd_stable = function(roc, roc_prima, mesh){
+  etas = numeric()
+  etas[1] = ifelse(roc_prima[1] <= 1,
+                   ((roc_prima[1] - 1) ^ 2) * mesh[1],
+                   ((roc_prima[1] - 1) ^ 2) / roc_prima[1] * roc[1]
+  )
+  for (i in 2:length(mesh)) {
+    etas[i] = ifelse(roc_prima[i] <= 1,
+                     ((roc_prima[i] - 1) ^ 2) * (mesh[i] - mesh[i-1]),
+                     ((roc_prima[i] - 1) ^ 2) / roc_prima[i] * (roc[i] - roc[i-1])
+    )
+  }
+  eta = sum(etas)
+  return(estandarizacion(eta)
+ )
+}
 
 eta_poblacional_I = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
-  p_opp = 1 - p
-  point = p_opp
   
-  inv = qnorm(point, 2.5, sqrt(0.25))
+  inv = qnorm(1-p, 2.5, sqrt(0.25))
   numerador = dnorm(inv, mux, sqrt(0.25))
   denominador = dnorm(inv, 2.5, sqrt(0.25))
-  etas = numerador/denominador
-
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  integral = sum(integrando) * base
   
-  return(integral/(integral + 1))
+  roc = 1 - pnorm(inv, mux, sqrt(0.25))
+  roc_prima = numerador / denominador
+  
+  return(eta_pob_sd_stable(roc, roc_prima, p))
+  
 }
 
 eta_poblacional_II = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
-  p_opp = 1 - p
-  point = p_opp
-    
-  inv = qnorm(point, 2.5, sqrt(0.09))
+
+  inv = qnorm(1-p, 2.5, sqrt(0.09))
   numerador = dnorm(inv, mux, sqrt(0.25))
   denominador = dnorm(inv, 2.5, sqrt(0.09))
-  etas = numerador/denominador
   
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  integral = sum(integrando) * base
+  roc = 1 - pnorm(inv, mux, sqrt(0.25))
+  roc_prima = numerador/denominador
   
-  return(integral/(integral + 1))
+  return(eta_pob_sd_stable(roc, roc_prima, p))
+
 }
 
 eta_poblacional_III = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
-  p_opp = 1 - p
-  point = p_opp
-  
-  inv = qnorm(point, 2.5, sqrt(0.09))^3
+
+  inv = qnorm(1-p, 2.5, sqrt(0.09))^3
   numerador = dnorm(inv^(1/3), mux, sqrt(0.25)) * (1/3) * (inv^(-2/3))
   denominador = dnorm(inv^(1/3), 2.5, sqrt(0.09))* (1/3) * (inv^(-2/3))
-  etas = numerador/denominador
-
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  integral = sum(integrando) * base
   
-  return(integral/(integral + 1))
+  roc = 1 - pnorm(inv ^ (1/3), mux, sqrt(0.25))
+  roc_prima = numerador/denominador
+
+  return(eta_pob_sd_stable(roc, roc_prima, p))
+  
 }
 
 eta_poblacional_IV = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
-  p_opp = 1 - p
-  point = p_opp
   
-  inv = qlnorm(point, 2.5, sqrt(0.25))
+  inv = qlnorm(1-p, 2.5, sqrt(0.25))
   numerador = dlnorm(inv, mux, sqrt(0.09))
   denominador = dlnorm(inv, 2.5, sqrt(0.25))
-  etas= numerador/denominador
+  
+  roc = 1 - plnorm(inv, mux, sqrt(0.09) )
+  roc_prima = numerador/denominador
 
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  integral = sum(integrando)*base
-
-  return(integral/(integral + 1))
+  return(eta_pob_sd_stable(roc, roc_prima, p))
 }
+
 eta_poblacional_V_05 = function(mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
-  p_opp = 1 - p
-  point = p_opp
-  
-  inv = qgamma(point, shape = 2, rate = 0.5)
-  numerador = dgamma(point, shape = 2, rate = 0.12)
-  denominador = dgamma(inv, shape = 2, rate = 0.5)
-  etas = numerador/denominador
-  
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  integral = sum(integrando) * base
 
-  return(integral/(integral + 1))
+  inv = qgamma(1-p, shape = 2, rate = 0.5)
+  numerador = dgamma(inv, shape = 2, rate = 0.12)
+  denominador = dgamma(inv, shape = 2, rate = 0.5)
+  
+  roc = 1 - pgamma(inv, shape = 2, rate = 0.12)
+  roc_prima = numerador/denominador
+  
+  return(eta_pob_sd_stable(roc, roc_prima, p))
 }
 
 eta_poblacional_V_1 = function(mux, mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
-  p_opp = 1 - p
-  point = p_opp
-  
-  inv = qgamma(point, shape = 2, rate = 1)
-  numerador = dgamma(point, shape = 2, rate = 0.24)
+
+  inv = qgamma(1-p, shape = 2, rate = 1)
+  numerador = dgamma(inv, shape = 2, rate = 0.24)
   denominador = dgamma(inv, shape = 2, rate = 1)
-  etas = numerador/denominador
   
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  integral = sum(integrando)*base
+  roc = 1 - pgamma(inv, shape = 2, rate = 0.24)
+  roc_prima = numerador/denominador
   
-  return(integral/(integral + 1))
+  return(eta_pob_sd_stable(roc, roc_prima, p))
 }
 
 eta_poblacional_VI = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
   
-  etas = numeric(mesh_size)
+  roc = numeric(mesh_size)
+  roc_prima = numeric(mesh_size)
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
   
-  inv = qnorm(point, 0, 1)                                
-  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-  denominador = dnorm(inv, 0, 1)
-    eta = numerador/denominador
-    etas[i] = eta
+    inv = qnorm(point, 0, 1)                                
+    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+    denominador = dnorm(inv, 0, 1)
+    roc[i] = 1 - DistribucionMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)
+    roc_prima[i] = numerador/denominador
   }
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
-  
-  return(integral/(integral + 1))
+
+  return(eta_pob_sd_stable(roc, roc_prima, p))
 }
 
 eta_poblacional_VII = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
   
-  etas = numeric(mesh_size)
+  roc = numeric(mesh_size)
+  roc_prima = numeric(mesh_size)
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
   
-  inv = qnorm(point, 0, 1)                                
-  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-  denominador = dnorm(inv, 0, 1)
-    eta = numerador/denominador
-    etas[i] = eta
+    inv = qnorm(point, 0, 1)                                
+    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+    denominador = dnorm(inv, 0, 1)
+    roc[i] = 1 - DistribucionMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)
+    roc_prima[i] = numerador/denominador
   }
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
   
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-  }
-
-  return(integral/(integral + 1))
+  return(eta_pob_sd_stable(roc, roc_prima, p))
+  
 }
 
 eta_poblacional_VIII = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
   
-  etas = numeric(mesh_size)
+  roc = numeric(mesh_size)
+  roc_prima = numeric(mesh_size)
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
   
-  inv = CuantilMixtura(point, 0, 3, 1, 1, 0.5)                               
-  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-  denominador = DensidadMixtura(inv, 0, 3, 1, 1, 0.5)
-    eta = numerador/denominador
-    etas[i] = eta
-  }
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
+    inv = CuantilMixtura(point, 0, 3, 1, 1, 0.5)                               
+    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+    denominador = DensidadMixtura(inv, 0, 3, 1, 1, 0.5)
+    roc[i] = 1 - DistribucionMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)
+    roc_prima[i] = numerador/denominador
   }
   
-  return(integral/(integral + 1))
+  return(eta_pob_sd_stable(roc, roc_prima, p))
 }
 
 eta_poblacional_IX = function(mu_1, mu_2, sd_1, sd_2, p_mix,mesh_size = m){
   p = seq(l, u, length.out = mesh_size)
   p_opp = 1 - p
   
-  etas = numeric(mesh_size)
+  roc = numeric(mesh_size)
+  roc_prima = numeric(mesh_size)
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
   
-  inv = CuantilMixtura(point, 0, 3, 1, sqrt(1.5), 0.5)                               
-  numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
-  denominador = DensidadMixtura(inv, 0, 3, 1, sqrt(1.5), 0.5)
-    eta = numerador/denominador
-    etas[i] = eta
-  }
-  integrando = (etas -1)^2
-  base = p[2]-p[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
+    inv = CuantilMixtura(point, 0, 3, 1, sqrt(1.5), 0.5)                               
+    numerador = DensidadMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix)        
+    denominador = DensidadMixtura(inv, 0, 3, 1, sqrt(1.5), 0.5)
+    roc[i] = 1 - DistribucionMixtura(inv, mu_1, mu_2, sd_1, sd_2, p_mix) 
+    roc_prima[i] = numerador/denominador
   }
   
-  return(integral/(integral + 1))
+  return(eta_pob_sd_stable(roc, roc_prima, p))
+  
 }
 
 ################################################################################
@@ -363,12 +341,61 @@ EtaEmpirica = function(control , casos){
   
   eta = sum((aux/n_d_bar - 1/(n_d_bar + 1))^2)
   
-  return(eta/(1+eta))
+  return(estandarizacion(eta))
 }
 
 ################################################################################
 # FUNCIONES PARA ESTIMACION PARAMETRICA
-EtaBinormal=function(controles,casos,p=seq(0.00001,0.99999,length.out=10000)){
+
+HacerBoxCox = function(xo, yo, P =F){
+  number_negative_obs = sum(xo <= 0) + sum(yo <= 0)
+  if (number_negative_obs > 0 ) {
+    constant = -min(min(xo) , min(yo)) + 5e-4
+    xo = xo + constant
+    yo = yo + constant
+  }
+  likbox=function(h,data,n){
+    m=length(data)-n
+    x=data[1:n]
+    y=data[(n+1):length(data)]
+    if (abs(h)<1e-5){
+      xh=log(x)
+      yh=log(y)
+    } else {
+      xh=((x^h)-1)/h
+      yh=((y^h)-1)/h
+    }
+    oout=-n/2*log(sum((xh-sum(xh)/n)^2)/n)-m/2*log(sum((yh-sum(yh)/m)^2)/m) +(h-1)*(sum(log(x))+sum(log(y)))
+    return(-oout)
+  }
+  
+  h_ini=-0.6
+  hhat=optim(h_ini,likbox,data=c(xo,yo),n=length(xo),method="BFGS")$par
+  if (abs(hhat)<1e-5){
+    muestra1=log(xo)
+    muestra2=log(yo)
+  } else {
+    muestra1=((xo^hhat)-1)/hhat
+    muestra2=((yo^hhat)-1)/hhat
+  }
+  
+  if (P) {
+    cat('El lambda de la transformada es: ', hhat, '\n')
+  }
+  df = data.frame(muestra1,muestra2)
+  return(df)
+}
+
+
+EtaBinormal=function(controles,casos, bc = F, p=seq(0.00001,0.99999,length.out=10000)){
+  
+  if (bc) {
+    df_trans = HacerBoxCox(controles, casos)
+    controles = df_trans$muestra1
+    casos = df_trans$muestra2
+  }
+  
+  
   mux=mean(controles)
   muy=mean(casos)
   sigmax=sd(controles)
@@ -383,7 +410,8 @@ EtaBinormal=function(controles,casos,p=seq(0.00001,0.99999,length.out=10000)){
     etaaux[k]=ifelse(ROCprima[k]<=1,(ROCprima[k]-1)^2*(p[k]-p[k-1]),(ROCprima[k]-1)^2/(ROCprima[k])*(ROC[k]-ROC[k-1]))
   }
   eta=sum(etaaux)
-  return(eta/(1+eta))
+  return(estandarizacion(eta)
+)
 }
 
 ################################################################################
@@ -442,12 +470,22 @@ Inverse = function(punto, funcion, mesh){
 }
 
 # Obtiene la estimacion de Eta a través de kernel
-EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000){
+EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000, bc = F){
+  
+  if (bc) {
+    df_trans = HacerBoxCox(muestra_sanos, muestra_enfermos)
+    muestra_sanos = df_trans$muestra1
+    muestra_enfermos = df_trans$muestra2
+  }
+  
+  m = c(muestra_sanos, muestra_enfermos)
   if (metodo == 'optimo') {
+    h = 1.06*sd(m)*length(m)^(-1/5)
     h_sanos= 1.06*sd(muestra_sanos)*length(muestra_sanos)^(-1/5)
     h_enfermos= 1.06*sd(muestra_enfermos)*length(muestra_enfermos)^(-1/5)
   }
   if (metodo == 'hscv'){
+    h =  hscv(m)
     h_sanos = hscv(muestra_sanos)
     h_enfermos = hscv((muestra_enfermos)) 
   }
@@ -460,36 +498,62 @@ EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000){
              max(c(muestra_sanos,muestra_enfermos)),
              length.out = mesh_size)
   
-  estimated_dist_sanos = DistKernel(sorted_sanos,mesh,h_sanos)
-  estimated_dist_enfermos = DistKernel(sorted_enfermos,mesh,h_enfermos)
-  estimated_dens_sanos = DensidadKernel(sorted_sanos, mesh,h_sanos)
-  estimated_dens_enfermos = DensidadKernel(sorted_enfermos, mesh,h_enfermos)
+  estimated_dist_sanos = DistKernel(sorted_sanos,mesh,h)
+  estimated_dist_enfermos = DistKernel(sorted_enfermos,mesh,h)
+  estimated_dens_sanos = DensidadKernel(sorted_sanos, mesh,h)
+  estimated_dens_enfermos = DensidadKernel(sorted_enfermos, mesh,h)
   
   p = seq(0.0001,0.999, length.out = mesh_size)
   p_opp = 1-p
   
-  etas = numeric(mesh_size)
+  # etas = numeric(mesh_size)
+  roc = numeric(mesh_size)
+  roc_prima = numeric(mesh_size)
   
   for (i in (1:mesh_size)) {
     point = p_opp[i]
     
     inv = Inverse(point, estimated_dist_sanos, mesh)
-    
     numerador = Evaluate(inv, estimated_dens_enfermos, mesh)
     denominador = Evaluate(inv, estimated_dens_sanos, mesh)
-    eta = numerador/denominador
-    etas[i] = eta
     
+    roc[i] = 1 - Evaluate(inv, estimated_dist_enfermos, mesh)
+    roc_prima[i] = numerador / denominador
+
   }
   
-  
-  integrando = (etas -1)^2
-  base = mesh[2]-mesh[1]
-  
-  integral = 0
-  for (eta in integrando) {
-    integral = integral + (eta*base)
-    
-  }
-  return(integral/(integral + 1))
+  return(eta_pob_sd_stable(roc, roc_prima, p))
+
 }
+
+##################################################################
+# FUNCIÓN PARA ENCONTRAR EL RATE ADECUADO PARA EL VALOR DE AUC
+
+ObtenerRateGamma = function(Y_pob, rate_x, auc_target, tol = 0.01, max_iter = 100){
+  lower = 0
+  upper = 15
+  iter = 0
+  
+  while(iter < max_iter){
+    bisectriz = (lower + upper) / 2
+    iter = iter + 1
+    set.seed(1)
+    # Muestra de X
+    X_pob = rgamma(1e5, shape = bisectriz, rate = rate_x)
+    auc_iter = as.numeric(pROC::auc(response = c(rep(1, 1e5), rep(0, 1e5)), predictor = c(Y_pob, X_pob)))
+    cat('AUC iteración ', iter, ': ', auc_iter, '\n')
+    
+    if(abs(auc_iter - auc_target) < tol){
+      return(bisectriz)
+    }
+    if(auc_iter > auc_target){
+      upper = bisectriz
+    }
+    if(auc_iter < auc_target){
+      lower = bisectriz
+    }
+    
+  }
+  return(F)
+}
+

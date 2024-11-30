@@ -1,6 +1,6 @@
 # Instala las librerias necesarias para correr todos los scripts de forma correcta
 
-depencencies = c('ks', 'jsonlite', 'here')
+depencencies = c('ks', 'jsonlite', 'here', 'pROC')
 
 install_if_missing = function(packages) {
   missing_packages = packages[!(packages %in% installed.packages()[, "Package"])]
