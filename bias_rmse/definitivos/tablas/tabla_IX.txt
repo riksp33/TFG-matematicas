@@ -1,0 +1,52 @@
+
+\begin{table}[H]
+\centering
+\caption{Simulación de Bias para diferentes tamaños muestrales de $Y \sim \Gamma(0.5, 0.5)$, $X \sim \Gamma(\lambda_x, 4)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &-0.2903 & 0.0010 & -0.0557 & -0.1654 \\
+0.431852 & 50 & -0.3592 & -0.0053 & -0.0539 & -0.1688 \\
+ & 100 &-0.3927 & -0.0081 & -0.0408 & -0.1539 \\
+\midrule
+ & 20 &-0.3453 & 0.0211 & -0.0351 & -0.0904 \\
+0.512795 & 50 & -0.4205 & 0.0167 & -0.0257 & -0.0810 \\
+ & 100 &-0.4611 & 0.0142 & -0.0207 & -0.0695 \\
+\midrule
+ & 20 &-0.3950 & 0.0272 & 0.0298 & -0.0145 \\
+0.639280 & 50 & -0.4871 & 0.0193 & 0.0268 & -0.0198 \\
+ & 100 &-0.5442 & 0.0175 & 0.0217 & -0.0181 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
+
+
+
+\begin{table}[H]
+\centering
+\caption{Simulación de $RMSE$ para diferentes tamaños muestrales de $Y \sim \Gamma(0.5, 0.5)$, $X \sim \Gamma(\lambda_x, 4)$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &0.2948 & 0.0768 & 0.1221 & 0.1907 \\
+0.431852 & 50 & 0.3599 & 0.0492 & 0.0885 & 0.1810 \\
+ & 100 &0.3928 & 0.0363 & 0.0650 & 0.1618 \\
+\midrule
+ & 20 &0.3501 & 0.0719 & 0.1224 & 0.1471 \\
+0.512795 & 50 & 0.4216 & 0.0452 & 0.0732 & 0.1070 \\
+ & 100 &0.4614 & 0.0326 & 0.0509 & 0.0840 \\
+\midrule
+ & 20 &0.4013 & 0.0562 & 0.1022 & 0.0931 \\
+0.639280 & 50 & 0.4896 & 0.0344 & 0.0694 & 0.0598 \\
+ & 100 &0.5449 & 0.0269 & 0.0490 & 0.0415 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}

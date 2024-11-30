@@ -1,0 +1,52 @@
+
+\begin{table}[H]
+\centering
+\caption{Simulación de Bias para diferentes tamaños muestrales de $\log(Y) \sim N(0, 1)$, $\log(X) \sim N(\mu_x, \frac{3}{2})$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &-0.5544 & -0.0859 & -0.2167 & -0.2162 \\
+0.645270 & 50 & -0.5959 & -0.0764 & -0.1702 & -0.1761 \\
+ & 100 &-0.6157 & -0.0742 & -0.1625 & -0.1694 \\
+\midrule
+ & 20 &-0.6645 & -0.0871 & -0.1745 & -0.1773 \\
+0.800319 & 50 & -0.7076 & -0.0570 & -0.1278 & -0.1319 \\
+ & 100 &-0.7364 & -0.0450 & -0.1181 & -0.1230 \\
+\midrule
+ & 20 &-0.6231 & -0.0428 & -0.1119 & -0.1135 \\
+0.872660 & 50 & -0.6676 & -0.0333 & -0.0915 & -0.0940 \\
+ & 100 &-0.6975 & -0.0257 & -0.0804 & -0.0838 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
+
+
+
+\begin{table}[H]
+\centering
+\caption{Simulación de $RMSE$ para diferentes tamaños muestrales de $\log(Y) \sim N(0, 1)$, $\log(X) \sim N(\mu_x, \frac{3}{2})$}
+\setlength{\tabcolsep}{11pt} % Ajusta el espacio entre las columnas
+\begin{tabularx}{0.8\textwidth}{c c *{4}{>{\centering\arraybackslash}X}}
+\toprule
+$\eta_{log}$ & n & $\hat{\eta}_{log}^{NonParametric}$ & $\hat{\eta}_{log}^{N}$ & $\hat{\eta}_{log}^{K = g, h=csv}$ & $\hat{\eta}_{log}^{K = g, h = h*}$ \\
+\midrule
+ & 20 &0.5555 & 0.2484 & 0.3089 & 0.3017 \\
+0.645270 & 50 & 0.5962 & 0.1954 & 0.2381 & 0.2385 \\
+ & 100 &0.6158 & 0.1533 & 0.2125 & 0.2159 \\
+\midrule
+ & 20 &0.6665 & 0.1787 & 0.2354 & 0.2323 \\
+0.800319 & 50 & 0.7085 & 0.1083 & 0.1617 & 0.1627 \\
+ & 100 &0.7368 & 0.0740 & 0.1377 & 0.1413 \\
+\midrule
+ & 20 &0.6261 & 0.0769 & 0.1329 & 0.1313 \\
+0.872660 & 50 & 0.6698 & 0.0489 & 0.1009 & 0.1015 \\
+ & 100 &0.6991 & 0.0331 & 0.0852 & 0.0880 \\
+\midrule
+
+\end{tabularx}
+\label{extended_table}
+\end{table}
