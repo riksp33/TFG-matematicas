@@ -341,8 +341,7 @@ EtaEmpirica = function(control , casos){
   
   eta = sum((aux/n_d_bar - 1/(n_d_bar + 1))^2)
   
-  return(estandarizacion(eta)
-)
+  return(estandarizacion(eta))
 }
 
 ################################################################################
@@ -471,12 +470,22 @@ Inverse = function(punto, funcion, mesh){
 }
 
 # Obtiene la estimacion de Eta a través de kernel
-EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000){
+EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000, bc = F){
+  
+  if (bc) {
+    df_trans = HacerBoxCox(muestra_sanos, muestra_enfermos)
+    muestra_sanos = df_trans$muestra1
+    muestra_enfermos = df_trans$muestra2
+  }
+  
+  m = c(muestra_sanos, muestra_enfermos)
   if (metodo == 'optimo') {
+    h = 1.06*sd(m)*length(m)^(-1/5)
     h_sanos= 1.06*sd(muestra_sanos)*length(muestra_sanos)^(-1/5)
     h_enfermos= 1.06*sd(muestra_enfermos)*length(muestra_enfermos)^(-1/5)
   }
   if (metodo == 'hscv'){
+    h =  hscv(m)
     h_sanos = hscv(muestra_sanos)
     h_enfermos = hscv((muestra_enfermos)) 
   }
@@ -489,10 +498,10 @@ EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000){
              max(c(muestra_sanos,muestra_enfermos)),
              length.out = mesh_size)
   
-  estimated_dist_sanos = DistKernel(sorted_sanos,mesh,h_sanos)
-  estimated_dist_enfermos = DistKernel(sorted_enfermos,mesh,h_enfermos)
-  estimated_dens_sanos = DensidadKernel(sorted_sanos, mesh,h_sanos)
-  estimated_dens_enfermos = DensidadKernel(sorted_enfermos, mesh,h_enfermos)
+  estimated_dist_sanos = DistKernel(sorted_sanos,mesh,h)
+  estimated_dist_enfermos = DistKernel(sorted_enfermos,mesh,h)
+  estimated_dens_sanos = DensidadKernel(sorted_sanos, mesh,h)
+  estimated_dens_enfermos = DensidadKernel(sorted_enfermos, mesh,h)
   
   p = seq(0.0001,0.999, length.out = mesh_size)
   p_opp = 1-p
@@ -510,24 +519,11 @@ EtaKernel = function(muestra_sanos, muestra_enfermos, metodo, mesh_size = 1000){
     
     roc[i] = 1 - Evaluate(inv, estimated_dist_enfermos, mesh)
     roc_prima[i] = numerador / denominador
-    
-    # eta = numerador/denominador
-    # etas[i] = eta
-    # 
+
   }
   
   return(eta_pob_sd_stable(roc, roc_prima, p))
-  
-  # integrando = (etas -1)^2
-  # base = mesh[2]-mesh[1]
-  # 
-  # integral = 0
-  # for (eta in integrando) {
-  #   integral = integral + (eta*base)
-  #   
-  # }
-  # return(estandarizacion(eta)
- 
+
 }
 
 ##################################################################
