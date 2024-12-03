@@ -57,12 +57,12 @@ function nivel_escenario_2()
         end
 
         # Calculamos los valores p
-        p_val_auc[i] = mean(auc_bootstrap .>= auc_base)
-        p_val_youden[i] = mean(youden_bootstrap .>= youden_base)
-        p_val_no_param[i] = mean(no_param_bootstrap .>= no_param_base)
-        p_val_param[i] = mean(binormal_bootstrap .>= param_base)
-        p_val_kernel_opt[i] = mean(kernel_opt_bootstrap .>= kernel_opt_base)
-        p_val_kernel_hscv[i] = mean(kernel_hscv_bootstrap .>= kernel_hscv_base)
+        p_val_auc[i] = 1 - mean(auc_bootstrap .>= auc_base)
+        p_val_youden[i] =1 -  mean(youden_bootstrap .>= youden_base)
+        p_val_no_param[i] = 1 - mean(no_param_bootstrap .>= no_param_base)
+        p_val_param[i] = 1 - mean(binormal_bootstrap .>= param_base)
+        p_val_kernel_opt[i] = 1 - mean(kernel_opt_bootstrap .>= kernel_opt_base)
+        p_val_kernel_hscv[i] = 1 - mean(kernel_hscv_bootstrap .>= kernel_hscv_base)
     end
 
     # Calculamos los niveles del test

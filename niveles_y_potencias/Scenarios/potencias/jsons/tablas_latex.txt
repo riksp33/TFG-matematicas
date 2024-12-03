@@ -1,0 +1,115 @@
+\begin{table}[H]
+\centering
+\caption{Resultados de potencias para diferentes estimadores.}
+\renewcommand{\arraystretch}{1.5} % Incrementa el espaciado entre filas
+\begin{tabular}{lllccc}
+\multicolumn{3}{c}{}  & \multicolumn{3}{c}{\(n_x = n_y\)} \\
+\cmidrule(lr){4-6}
+Distribución sanos & Distribución enfermos &   & 20 & 50 & 100 \\
+\midrule
+ N(0,1) & N(0.36,1) & $\widehat{AUC}$ & 0.259 & 0.505 & 0.786 \\
+  &  & $\widehat{J}$ & 0.213 & 0.448 & 0.701 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.064 & 0.11 & 0.13 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.096 & 0.21 & 0.529 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.066 & 0.162 & 0.354 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.174 & 0.301 & 0.502 \\
+&&&&&\\
+  & N(0.44,1.4) & $\widehat{AUC}$ & 0.274 & 0.514 & 0.782 \\
+  &  & $\widehat{J}$ & 0.271 & 0.567 & 0.875 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.091 & 0.22 & 0.442 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.422 & 0.829 & 0.987 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.259 & 0.624 & 0.924 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.431 & 0.789 & 0.967 \\
+&&&&&\\
+  & N(0.26,0.3) & $\widehat{AUC}$ & 0.254 & 0.482 & 0.759 \\
+  &  & $\widehat{J}$ & 0.64 & 0.976 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.656 & 0.905 & 0.994 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.002 & 0.774 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.041 & 0.364 & 0.99 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.242 & 0.673 & 1.0 \\
+&&&&&\\
+\bottomrule
+\end{tabular}
+\label{tab:simulated_power}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Resultados de potencias para diferentes estimadores.}
+\renewcommand{\arraystretch}{1.5} % Incrementa el espaciado entre filas
+\begin{tabular}{lllccc}
+\multicolumn{3}{c}{}  & \multicolumn{3}{c}{\(n_x = n_y\)} \\
+\cmidrule(lr){4-6}
+Distribución sanos & Distribución enfermos &   & 20 & 50 & 100 \\
+\midrule
+ LN(0,1) & LN(0.28,0.5) & $\widehat{AUC}$ & 0.242 & 0.495 & 0.784 \\
+  &  & $\widehat{J}$ & 0.4 & 0.821 & 0.997 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.276 & 0.488 & 0.707 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.002 & 0.443 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.007 & 0.06 & 0.522 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.085 & 0.297 & 0.817 \\
+&&&&&\\
+  & LN(0.46,3/2) & $\widehat{AUC}$ & 0.26 & 0.505 & 0.783 \\
+  &  & $\widehat{J}$ & 0.287 & 0.616 & 0.916 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.12 & 0.29 & 0.56 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.527 & 0.915 & 0.996 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.295 & 0.708 & 0.968 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.538 & 0.873 & 0.987 \\
+&&&&&\\
+  & LN(0.26,0.2) & $\widehat{AUC}$ & 0.262 & 0.497 & 0.766 \\
+  &  & $\widehat{J}$ & 0.795 & 1.0 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.869 & 0.996 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.026 & 0.933 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.016 & 0.131 & 0.58 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.067 & 0.605 & 1.0 \\
+&&&&&\\
+  & LN(0.57,2) & $\widehat{AUC}$ & 0.258 & 0.509 & 0.777 \\
+  &  & $\widehat{J}$ & 0.397 & 0.826 & 0.989 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.244 & 0.723 & 0.972 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.873 & 1.0 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.566 & 0.963 & 0.996 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.796 & 0.993 & 1.0 \\
+&&&&&\\
+\bottomrule
+\end{tabular}
+\label{tab:simulated_power}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Resultados de potencias para diferentes estimadores.}
+\renewcommand{\arraystretch}{1.5} % Incrementa el espaciado entre filas
+\begin{tabular}{lllccc}
+\multicolumn{3}{c}{}  & \multicolumn{3}{c}{\(n_x = n_y\)} \\
+\cmidrule(lr){4-6}
+Distribución sanos & Distribución enfermos &   & 20 & 50 & 100 \\
+\midrule
+ Gamma(0.5,0.5) & Gamma(1.05,1) & $\widehat{AUC}$ & 0.989 & 1.0 & 1.0 \\
+  &  & $\widehat{J}$ & 0.959 & 1.0 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.612 & 0.956 & 0.998 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.668 & 1.0 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.713 & 0.955 & 0.996 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.833 & 0.986 & 1.0 \\
+&&&&&\\
+  & Gamma(3.28,4) & $\widehat{AUC}$ & . & . & . \\
+  &  & $\widehat{J}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{N}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & . & . & . \\
+&&&&&\\
+  & Gamma(0.35,1/8) & $\widehat{AUC}$ & . & . & . \\
+  &  & $\widehat{J}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{N}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & . & . & . \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & . & . & . \\
+&&&&&\\
+\bottomrule
+\end{tabular}
+\label{tab:simulated_power}
+\end{table}
+
+

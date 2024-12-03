@@ -3,6 +3,7 @@ using Distributions
 using Statistics
 using LinearAlgebra
 using KernelDensitySJ
+using Optim
 
 export auc, youden, non_parametric_eta, parametric_eta, eta_kernel
 
@@ -82,7 +83,6 @@ function hacer_box_cox(controles::Vector{Float64}, casos::Vector{Float64})
     h_ini = -0.6
     result = optimize(h -> likbox(h, vcat(casos, controles), length(casos)), -1.0, 1.0, Brent())
     hhat = Optim.minimizer(result)
-    println(hhat)
     if abs(hhat) < 1e-5
         casos_t = log.(casos)
         controles_t = log.(controles)
@@ -198,8 +198,7 @@ end
 
 function eta_kernel(muestra_sanos::Vector{Float64}, muestra_enfermos::Vector{Float64}, metodo::String; mesh_size::Int = 1000, bc::Bool = false)::Float64
     if bc
-        df_trans = hacer_box_cox(muestra_sanos, muestra_enfermos)
-        muestra_sanos, muestra_enfermos = df_trans.muestra1, df_trans.muestra2
+        muestra_sanos, muestra_enfermos = hacer_box_cox(muestra_sanos, muestra_enfermos)
     end
 
     m = vcat(muestra_sanos, muestra_enfermos)
