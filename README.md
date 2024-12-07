@@ -1,4 +1,4 @@
-# Trabajo Fin de Grado en Matemáticas. Ricardo de la Azuela Sánchez
+# Trabajo Fin de Grado en Matemáticas: Ricardo de la Azuela Sánchez
 
 ## Resumen
 

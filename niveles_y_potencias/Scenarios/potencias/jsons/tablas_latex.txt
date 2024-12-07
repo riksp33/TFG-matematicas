@@ -93,19 +93,19 @@ Distribución sanos & Distribución enfermos &   & 20 & 50 & 100 \\
   &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.713 & 0.955 & 0.996 \\
   &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.833 & 0.986 & 1.0 \\
 &&&&&\\
-  & Gamma(3.28,4) & $\widehat{AUC}$ & . & . & . \\
-  &  & $\widehat{J}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{NonParametric}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{N}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & . & . & . \\
+  & Gamma(3.28,4) & $\widehat{AUC}$ & 1.0 & 1.0 & 1.0 \\
+  &  & $\widehat{J}$ & 1.0 & 1.0 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 1.0 & 1.0 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 1.0 & 1.0 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.885 & 0.886 & 0.916 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 1.0 & 1.0 & 1.0 \\
 &&&&&\\
-  & Gamma(0.35,1/8) & $\widehat{AUC}$ & . & . & . \\
-  &  & $\widehat{J}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{NonParametric}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{N}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & . & . & . \\
-  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & . & . & . \\
+  & Gamma(0.35,1/8) & $\widehat{AUC}$ & 0.0 & 0.0 & 0.0 \\
+  &  & $\widehat{J}$ & 0.0 & 0.0 & 0.0 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.373 & 0.651 & 0.898 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.381 & 0.979 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.004 & 0.005 & 0.001 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.001 & 0.004 & 0.058 \\
 &&&&&\\
 \bottomrule
 \end{tabular}
