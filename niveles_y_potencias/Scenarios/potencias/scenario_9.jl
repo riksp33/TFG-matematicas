@@ -26,8 +26,8 @@ function potencia_escenario_9()
         p_val_kernel_hscv = Vector{Float64}(undef, MC)
 
         @threads for i in 1:MC
-            controles = rand(Gamma(0.5, 0.5), n)
-            casos = rand(Gamma(3.28, 4), n)
+            controles = rand(Gamma(0.5, 1 / 0.5), n)
+            casos = rand(Gamma(3.28, 1 /4), n)
 
             auc_base = auc(controles, casos)
             youden_base = youden(controles, casos)

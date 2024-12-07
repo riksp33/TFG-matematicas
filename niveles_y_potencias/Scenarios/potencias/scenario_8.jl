@@ -26,7 +26,7 @@ function potencia_escenario_8()
         p_val_kernel_hscv = Vector{Float64}(undef, MC)
 
         @threads for i in 1:MC
-            controles = rand(Gamma(0.5, 0.5), n)
+            controles = rand(Gamma(0.5, 1 / 0.5), n)
             casos = rand(Gamma(1.05, 1), n)
 
             auc_base = auc(controles, casos)
