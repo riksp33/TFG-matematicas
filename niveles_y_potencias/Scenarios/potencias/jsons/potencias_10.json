@@ -1,27 +1,27 @@
 {
  "N_20": {
-  "youden": 0.0,
-  "param": 0.381,
-  "kernel_hscv": 0.004,
-  "auc": 0.0,
-  "no_param": 0.373,
-  "kernel_opt": 0.001
+  "youden": 0.259,
+  "param": 0.508,
+  "kernel_hscv": 0.208,
+  "auc": 0.206,
+  "no_param": 0.128,
+  "kernel_opt": 0.566
  },
  "N_100": {
-  "youden": 0.0,
-  "param": 1.0,
-  "kernel_hscv": 0.001,
-  "auc": 0.0,
-  "no_param": 0.898,
-  "kernel_opt": 0.058
+  "youden": 0.879,
+  "param": 0.993,
+  "kernel_hscv": 0.531,
+  "auc": 0.665,
+  "no_param": 0.669,
+  "kernel_opt": 0.972
  },
  "N_50": {
-  "youden": 0.0,
-  "param": 0.979,
-  "kernel_hscv": 0.005,
-  "auc": 0.0,
-  "no_param": 0.651,
-  "kernel_opt": 0.004
+  "youden": 0.566,
+  "param": 0.889,
+  "kernel_hscv": 0.388,
+  "auc": 0.397,
+  "no_param": 0.346,
+  "kernel_opt": 0.818
  },
  "title": "Resultados de nivel del test para distintos tamaños muestrales. Escenario 10"
 }
