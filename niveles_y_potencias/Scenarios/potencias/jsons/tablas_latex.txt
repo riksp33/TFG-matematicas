@@ -86,26 +86,26 @@ Distribución sanos & Distribución enfermos &   & 20 & 50 & 100 \\
 \cmidrule(lr){4-6}
 Distribución sanos & Distribución enfermos &   & 20 & 50 & 100 \\
 \midrule
- Gamma(0.5,0.5) & Gamma(1.05,1) & $\widehat{AUC}$ & 0.989 & 1.0 & 1.0 \\
-  &  & $\widehat{J}$ & 0.959 & 1.0 & 1.0 \\
-  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.612 & 0.956 & 0.998 \\
-  &  & $\hat{\eta}_{log}^{N}$ & 0.668 & 1.0 & 1.0 \\
-  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.713 & 0.955 & 0.996 \\
-  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.833 & 0.986 & 1.0 \\
+ Gamma(0.5,0.5) & Gamma(1.05,1) & $\widehat{AUC}$ & 0.182 & 0.451 & 0.703 \\
+  &  & $\widehat{J}$ & 0.223 & 0.539 & 0.859 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.143 & 0.171 & 0.276 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.007 & 0.224 & 0.857 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.065 & 0.08 & 0.108 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.03 & 0.036 & 0.041 \\
 &&&&&\\
-  & Gamma(3.28,4) & $\widehat{AUC}$ & 1.0 & 1.0 & 1.0 \\
-  &  & $\widehat{J}$ & 1.0 & 1.0 & 1.0 \\
-  &  & $\hat{\eta}_{log}^{NonParametric}$ & 1.0 & 1.0 & 1.0 \\
-  &  & $\hat{\eta}_{log}^{N}$ & 1.0 & 1.0 & 1.0 \\
-  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.885 & 0.886 & 0.916 \\
-  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 1.0 & 1.0 & 1.0 \\
+  & Gamma(3.28,4) & $\widehat{AUC}$ & 0.261 & 0.518 & 0.761 \\
+  &  & $\widehat{J}$ & 0.592 & 0.976 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.511 & 0.826 & 0.962 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.022 & 0.917 & 1.0 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.036 & 0.059 & 0.485 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.023 & 0.025 & 0.269 \\
 &&&&&\\
-  & Gamma(0.35,1/8) & $\widehat{AUC}$ & 0.0 & 0.0 & 0.0 \\
-  &  & $\widehat{J}$ & 0.0 & 0.0 & 0.0 \\
-  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.373 & 0.651 & 0.898 \\
-  &  & $\hat{\eta}_{log}^{N}$ & 0.381 & 0.979 & 1.0 \\
-  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.004 & 0.005 & 0.001 \\
-  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.001 & 0.004 & 0.058 \\
+  & Gamma(0.35,1/8) & $\widehat{AUC}$ & 0.206 & 0.397 & 0.665 \\
+  &  & $\widehat{J}$ & 0.259 & 0.566 & 0.879 \\
+  &  & $\hat{\eta}_{log}^{NonParametric}$ & 0.128 & 0.346 & 0.669 \\
+  &  & $\hat{\eta}_{log}^{N}$ & 0.508 & 0.889 & 0.993 \\
+  &  & $\hat{\eta}_{log}^{K = g, h=csv}$ & 0.208 & 0.388 & 0.531 \\
+  &  & $\hat{\eta}_{log}^{K = g, h = h*}$ & 0.566 & 0.818 & 0.972 \\
 &&&&&\\
 \bottomrule
 \end{tabular}
