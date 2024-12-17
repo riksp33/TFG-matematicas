@@ -1,11 +1,11 @@
 {
  "N_50": {
-  "youden": 0.025,
-  "param": 0.054,
-  "kernel_hscv": 0.257,
-  "auc": 0.0,
-  "no_param": 1.0,
-  "kernel_opt": 0.136
+  "youden": 0.06,
+  "param": 0.1,
+  "kernel_hscv": 0.1,
+  "auc": 0.06,
+  "no_param": 0.08,
+  "kernel_opt": 0.07
  },
  "title": "Resultados de nivel del test para tamaño muestral N = 50. Gammas"
 }

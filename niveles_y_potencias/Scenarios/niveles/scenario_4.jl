@@ -10,7 +10,8 @@ using Base.Threads
 
 function nivel_escenario_4()
     Random.seed!(1)
-    n = 100
+    
+    n = 50
     B = 500
     MC = 1000
     alpha = 0.05
@@ -45,8 +46,10 @@ function nivel_escenario_4()
 
         # Proceso de Bootstrap
         for b in 1:B
-            controles_b = rand(controles, n)
-            casos_b = rand(casos, n)
+            todos = vcat(controles, casos)
+            replica = rand(todos, 2*n)
+            controles_b = replica[1:n]
+            casos_b = replica[n+1:end]
             auc_bootstrap[b] = auc(controles_b, casos_b)
             youden_bootstrap[b] = youden(controles_b, casos_b)
             no_param_bootstrap[b] = non_parametric_eta(controles_b, casos_b)

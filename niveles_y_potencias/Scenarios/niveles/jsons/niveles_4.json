@@ -1,11 +1,11 @@
 {
  "N_50": {
-  "youden": 0.021,
-  "param": 0.043,
-  "kernel_hscv": 0.214,
-  "auc": 0.0,
-  "no_param": 1.0,
-  "kernel_opt": 0.11
+  "youden": 0.09,
+  "param": 0.04,
+  "kernel_hscv": 0.08,
+  "auc": 0.08,
+  "no_param": 0.08,
+  "kernel_opt": 0.06
  },
  "title": "Resultados de nivel del test para tamaño muestral N = 50. Lognormales"
 }
