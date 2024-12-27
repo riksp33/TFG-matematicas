@@ -4,6 +4,8 @@ using Statistics
 using LinearAlgebra
 using KernelDensitySJ
 using Optim
+using LoopVectorization
+using SpecialFunctions
 
 export auc, youden, non_parametric_eta, parametric_eta, eta_kernel
 
@@ -162,17 +164,45 @@ function gaussian_kernel(x::Float64)
 end
 
 function DensidadKernel(datos::Vector{Float64}, puntos::StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}}, h::Float64) :: Vector{Float64}
-    diffs = (puntos .- datos') / h
-    matk = pdf.(Normal(0.0, 1.0), diffs)
-    densidad = sum(matk, dims=2) / (length(datos) * h)
-    return vec(densidad)
+    # diffs = (puntos .- datos') / h
+    # matk = pdf.(Normal(0.0, 1.0), diffs)
+    # densidad = sum(matk, dims=2) / (length(datos) * h)
+    # return vec(densidad)
+    n = length(datos)
+    m = length(puntos)
+    densidad = zeros(Float64, m)
+
+    @tturbo for i in 1:m
+        matk = 0.0
+        for j in 1:n
+            diff = (puntos[i] - datos[j]) / h
+            matk += exp(-0.5 * diff^2) / sqrt(2 * π)  # Fórmula explícita de pdf
+        end
+        densidad[i] = matk / (n * h)
+    end
+
+    return densidad
 end
 
 function DistKernel(datos::Vector{Float64}, puntos::StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}}, h::Float64) :: Vector{Float64}
-    diffs = (puntos .- datos') / h
-    matk = cdf.(Normal(0.0, 1.0), diffs)
-    distribucion = sum(matk, dims=2) / length(datos)
-    return vec(distribucion)
+    # diffs = (puntos .- datos') / h
+    # matk = cdf.(Normal(0.0, 1.0), diffs)
+    # distribucion = sum(matk, dims=2) / length(datos)
+    # return vec(distribucion)
+    n = length(datos)
+    m = length(puntos)
+    distribucion = zeros(Float64, m)
+
+    @tturbo for i in 1:m
+        matk = 0.0
+        for j in 1:n
+            diff = (puntos[i] - datos[j]) / h
+            matk += 0.5 * (1.0 + erf(diff / sqrt(2)))
+        end
+        distribucion[i] = matk / n
+    end
+
+    return distribucion
 end
 function Evaluate(punto::Float64, funcion::Vector{Float64}, mesh::StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}})::Float64
     index = searchsortedlast(mesh, punto)
