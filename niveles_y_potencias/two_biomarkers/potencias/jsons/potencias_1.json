@@ -1,0 +1,49 @@
+{
+ "correlation_0.5": {
+  "N_20": {
+   "youden": 0.059,
+   "param": 0.13,
+   "kernel_hscv": 0.022,
+   "auc": 0.061,
+   "kernel_opt": 0.103
+  },
+  "N_100": {
+   "youden": 0.136,
+   "param": 0.612,
+   "kernel_hscv": 0.43,
+   "auc": 0.09,
+   "kernel_opt": 0.481
+  },
+  "N_50": {
+   "youden": 0.079,
+   "param": 0.328,
+   "kernel_hscv": 0.168,
+   "auc": 0.079,
+   "kernel_opt": 0.248
+  }
+ },
+ "correlation_0.0": {
+  "N_20": {
+   "youden": 0.063,
+   "param": 0.142,
+   "kernel_hscv": 0.045,
+   "auc": 0.065,
+   "kernel_opt": 0.113
+  },
+  "N_100": {
+   "youden": 0.129,
+   "param": 0.593,
+   "kernel_hscv": 0.401,
+   "auc": 0.09,
+   "kernel_opt": 0.443
+  },
+  "N_50": {
+   "youden": 0.075,
+   "param": 0.312,
+   "kernel_hscv": 0.146,
+   "auc": 0.069,
+   "kernel_opt": 0.249
+  }
+ },
+ "title": "Resultados de potencia del test 2 marcadores para distintos tamaños muestrales. Escenario 1"
+}

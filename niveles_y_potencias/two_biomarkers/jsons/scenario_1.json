@@ -1,0 +1,24 @@
+{
+ "N_20": {
+  "youden": 0.06,
+  "param": 0.05,
+  "kernel_hscv": 0.02,
+  "auc": 0.05,
+  "kernel_opt": 0.05
+ },
+ "N_100": {
+  "youden": 0.04,
+  "param": 0.09,
+  "kernel_hscv": 0.06,
+  "auc": 0.04,
+  "kernel_opt": 0.1
+ },
+ "N_50": {
+  "youden": 0.03,
+  "param": 0.02,
+  "kernel_hscv": 0.04,
+  "auc": 0.03,
+  "kernel_opt": 0.08
+ },
+ "title": "Resultados de potencia del test 2 marcadores para distintos tamaños muestrales. Escenario 1"
+}
