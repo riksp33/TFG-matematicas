@@ -3,7 +3,6 @@ import os
 os.chdir('./niveles_y_potencias/two_biomarkers/niveles')
 
 def json_to_latex_table(json_files, output_file):
-    # Orden de filas de la tabla
     auc_values = ["0.7", "0.8", "0.9"]
     correlations = ["0.0", "0.5"]
     measures = [
@@ -14,7 +13,6 @@ def json_to_latex_table(json_files, output_file):
         "$\\hat{\\eta}_{log}^{K = g, h = h*}$"
     ]
 
-    # Inicia el código LaTeX
     latex_code = []
     latex_code.append("\\begin{table}[H]")
     latex_code.append("\\centering")
@@ -26,7 +24,6 @@ def json_to_latex_table(json_files, output_file):
     latex_code.append("AUC & Correlacion &   & 20 & 50 & 100 \\\\")
     latex_code.append("\\midrule")
 
-    # Carga y procesa los datos de los archivos JSON
     for auc_idx, json_file in enumerate(json_files):
         with open(json_file, 'r') as file:
             data = json.load(file)
@@ -39,39 +36,35 @@ def json_to_latex_table(json_files, output_file):
                     for sample_size in ["20", "50", "100"]:
                         sample_key = f"N_{sample_size}"
                         if sample_key in data[corr_key]:
-                            if measure_idx == 0:  # AUC
+                            if measure_idx == 0:  
                                 row_values.append(data[corr_key][sample_key]["auc"])
-                            elif measure_idx == 1:  # Youden
+                            elif measure_idx == 1:  
                                 row_values.append(data[corr_key][sample_key]["youden"])
-                            elif measure_idx == 2:  # Kernel HSCV
+                            elif measure_idx == 2:  
                                 row_values.append(data[corr_key][sample_key]["kernel_hscv"])
-                            elif measure_idx == 3:  # Kernel Opt
+                            elif measure_idx == 3:  
                                 row_values.append(data[corr_key][sample_key]["param"])
-                            elif measure_idx == 4:  # Kernel Opt (h*)
+                            elif measure_idx == 4:  
                                 row_values.append(data[corr_key][sample_key]["kernel_opt"])
                         else:
                             row_values.append("N/A")
                     
-                    # Formatea la fila de LaTeX
                     if measure_idx == 0:
                         latex_code.append(f"{auc_values[auc_idx]} & $\\rho =$ {corr} & {measure} & {' & '.join(map(str, row_values))} \\\\")
                     else:
                         latex_code.append(f"    &              & {measure} & {' & '.join(map(str, row_values))} \\\\")
-                latex_code.append("[0.2cm]")  # Espaciado entre bloques
-        latex_code.append("&&&&&\\\\")  # Espaciado entre bloques AUC
+                latex_code.append("[0.2cm]")  
+        latex_code.append("&&&&&\\\\")  
 
-    # Finaliza la tabla
     latex_code.append("\\bottomrule")
     latex_code.append("\\end{tabular}")
     latex_code.append("\\label{tab:simulated_power3}")
     latex_code.append("\\end{table}")
 
-    # Guarda la tabla en el archivo de salida
     with open(output_file, 'w') as file:
         file.write('\n'.join(latex_code))
 
-# Ejemplo de uso
 json_files = ["nivel_1.json", "nivel_2.json", "nivel_3.json"]  
-json_files = ['./jsons/' + file for file in json_files]  # Ajusta la ruta según sea necesario
+json_files = ['./jsons/' + file for file in json_files]  
 output_file = "tabla_latex.txt"
 json_to_latex_table(json_files, output_file)
